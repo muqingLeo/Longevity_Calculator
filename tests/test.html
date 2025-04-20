@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longevity Calculator Tests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-pass, .test-fail {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .test-pass {
+            background-color: #e9f7ef;
+            border-left: 5px solid #27ae60;
+        }
+        
+        .test-fail {
+            background-color: #fadbd8;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        details {
+            margin-top: 10px;
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .test-details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        .test-summary {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .run-tests {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .run-tests:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Longevity Calculator - Test Suite</h1>
+    
+    <p>This page runs unit tests for the Longevity Calculator's core calculation functions. Click the button below to run the tests.</p>
+    
+    <button class="run-tests" onclick="runTests()">Run Tests</button>
+    
+    <div id="test-results">
+        <!-- Test results will be inserted here -->
+    </div>
+    
+    <!-- Import the calculator function -->
+    <script src="../src/js/calculator.js"></script>
+    
+    <!-- Import the test suite -->
+    <script src="calculator.test.js"></script>
+</body>
+</html>

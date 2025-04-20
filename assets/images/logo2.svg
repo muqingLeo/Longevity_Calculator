@@ -1,0 +1,93 @@
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Banner -->
+  <rect x="0" y="0" width="800" height="300" rx="20" ry="20" fill="#f8f9fa" stroke="#d0d7de" stroke-width="2"/>
+  
+  <!-- Heart -->
+  <g transform="translate(150, 150) scale(1.2)">
+    <path d="M0 30 C-30 -10, -70 -10, -70 30 C-70 70, 0 100, 0 100 C0 100, 70 70, 70 30 C70 -10, 30 -10, 0 30 Z" 
+          fill="#e63946" stroke="#9d0208" stroke-width="2">
+      <!-- Heartbeat animation -->
+      <animate attributeName="d" 
+               values="M0 30 C-30 -10, -70 -10, -70 30 C-70 70, 0 100, 0 100 C0 100, 70 70, 70 30 C70 -10, 30 -10, 0 30 Z;
+                      M0 35 C-25 -5, -65 -5, -65 35 C-65 75, 0 105, 0 105 C0 105, 65 75, 65 35 C65 -5, 25 -5, 0 35 Z;
+                      M0 30 C-30 -10, -70 -10, -70 30 C-70 70, 0 100, 0 100 C0 100, 70 70, 70 30 C70 -10, 30 -10, 0 30 Z"
+               dur="1.5s" 
+               repeatCount="indefinite" />
+    </path>
+  </g>
+  
+  <!-- Clock -->
+  <g transform="translate(240, 150)">
+    <!-- Clock Face -->
+    <circle cx="0" cy="0" r="70" fill="#f1faee" stroke="#457b9d" stroke-width="3"/>
+    
+    <!-- Clock Ticks -->
+    <line x1="0" y1="-60" x2="0" y2="-70" stroke="#1d3557" stroke-width="3"/>
+    <line x1="60" y1="0" x2="70" y2="0" stroke="#1d3557" stroke-width="3"/>
+    <line x1="0" y1="60" x2="0" y2="70" stroke="#1d3557" stroke-width="3"/>
+    <line x1="-60" y1="0" x2="-70" y2="0" stroke="#1d3557" stroke-width="3"/>
+    
+    <!-- Small Ticks -->
+    <line x1="30" y1="-52" x2="35" y2="-60.6" stroke="#1d3557" stroke-width="1.5"/>
+    <line x1="52" y1="-30" x2="60.6" y2="-35" stroke="#1d3557" stroke-width="1.5"/>
+    <line x1="52" y1="30" x2="60.6" y2="35" stroke="#1d3557" stroke-width="1.5"/>
+    <line x1="30" y1="52" x2="35" y2="60.6" stroke="#1d3557" stroke-width="1.5"/>
+    <line x1="-30" y1="52" x2="-35" y2="60.6" stroke="#1d3557" stroke-width="1.5"/>
+    <line x1="-52" y1="30" x2="-60.6" y2="35" stroke="#1d3557" stroke-width="1.5"/>
+    <line x1="-52" y1="-30" x2="-60.6" y2="-35" stroke="#1d3557" stroke-width="1.5"/>
+    <line x1="-30" y1="-52" x2="-35" y2="-60.6" stroke="#1d3557" stroke-width="1.5"/>
+    
+    <!-- Hour Hand -->
+    <line x1="0" y1="0" x2="0" y2="-35" stroke="#1d3557" stroke-width="5" stroke-linecap="round">
+      <animateTransform attributeName="transform"
+                        type="rotate"
+                        from="0 0 0"
+                        to="360 0 0"
+                        dur="12s"
+                        repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Minute Hand -->
+    <line x1="0" y1="0" x2="0" y2="-50" stroke="#1d3557" stroke-width="3" stroke-linecap="round">
+      <animateTransform attributeName="transform"
+                        type="rotate"
+                        from="0 0 0"
+                        to="360 0 0"
+                        dur="60s"
+                        repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Second Hand -->
+    <line x1="0" y1="10" x2="0" y2="-60" stroke="#e63946" stroke-width="1.5" stroke-linecap="round">
+      <animateTransform attributeName="transform"
+                        type="rotate"
+                        from="0 0 0"
+                        to="360 0 0"
+                        dur="5s"
+                        repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Center Dot -->
+    <circle cx="0" cy="0" r="6" fill="#1d3557"/>
+    <circle cx="0" cy="0" r="3" fill="#e63946"/>
+  </g>
+  
+  <!-- Connecting Line -->
+  <path d="M185 175 Q 200 140, 215 175" stroke="#457b9d" stroke-width="2" fill="none" />
+  
+  <!-- Text: Longevity Calculator -->
+  <text x="400" y="155" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#1d3557" text-anchor="start">Longevity</text>
+  <text x="400" y="205" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#e63946" text-anchor="start">Calculator</text>
+  
+  <!-- Decorative Elements -->
+  <path d="M400 215 L 700 215" stroke="#457b9d" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- DNA Helix Small Icon -->
+  <g transform="translate(670, 170) scale(0.4)">
+    <path d="M0,0 C20,-20 40,20 60,-20 C80,20 100,-20 120,0" stroke="#457b9d" stroke-width="4" fill="none"/>
+    <path d="M0,30 C20,10 40,50 60,10 C80,50 100,10 120,30" stroke="#457b9d" stroke-width="4" fill="none"/>
+    <line x1="20" y1="-15" x2="20" y2="25" stroke="#1d3557" stroke-width="2"/>
+    <line x1="60" y1="-25" x2="60" y2="15" stroke="#1d3557" stroke-width="2"/>
+    <line x1="100" y1="-15" x2="100" y2="25" stroke="#1d3557" stroke-width="2"/>
+  </g>
+</svg>

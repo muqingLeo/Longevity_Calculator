@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Biological Age Calculator</title>
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <!-- CSS imports with modular structure -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/results.css">
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="../assets/images/logo2.svg" alt="Longevity Calculator Logo" class="logo" height="200">
+            <p>Discover your biological age based on comprehensive lifestyle factors</p>
+        </header>
+        
+        <main>
+            <!-- Main form with tabs for different factor categories -->
+            <form id="calculator-form">
+                <div class="form-tabs">
+                    <button type="button" class="tab-button active" data-tab="basic">Basic Info</button>
+                    <button type="button" class="tab-button" data-tab="diet">Diet & Nutrition</button>
+                    <button type="button" class="tab-button" data-tab="activity">Physical Activity</button>
+                    <button type="button" class="tab-button" data-tab="lifestyle">Lifestyle</button>
+                    <button type="button" class="tab-button" data-tab="environment">Environment</button>
+                    <button type="button" class="tab-button" data-tab="medical">Medical</button>
+                </div>
+
+                <!-- Basic Information Tab -->
+                <div class="tab-content active" id="basic-tab">
+                    <h2>Basic Information</h2>
+                    
+                    <!-- Age input -->
+                    <div class="form-group">
+                        <label for="age">Chronological Age</label>
+                        <input type="number" id="age" name="age" min="18" max="120" required>
+                    </div>
+                    
+                    <!-- Gender selection -->
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Height and Weight -->
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" id="height" name="height" min="100" max="250">
+                        </div>
+                        <div class="form-group half">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" name="weight" min="30" max="300">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diet & Nutrition Tab -->
+                <div class="tab-content" id="diet-tab">
+                    <h2>Diet & Nutrition</h2>
+                    
+                    <!-- Diet Type -->
+                    <div class="form-group">
+                        <label for="diet-type">Primary Diet Type</label>
+                        <select id="diet-type" name="diet-type">
+                            <option value="">Select</option>
+                            <option value="standard">Standard/Omnivore</option>
+                            <option value="mediterranean">Mediterranean</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="pescatarian">Pescatarian</option>
+                            <option value="carnivore">Carnivore/Meat-Heavy</option>
+                            <option value="keto">Ketogenic</option>
+                            <option value="paleo">Paleo</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Diet Quality -->
+                    <div class="form-group">
+                        <label for="diet-quality">Overall Diet Quality</label>
+                        <select id="diet-quality" name="diet-quality">
+                            <option value="">Select</option>
+                            <option value="poor">Poor (mostly processed foods)</option>
+                            <option value="average">Average (mix of whole and processed foods)</option>
+                            <option value="good">Good (mostly whole, unprocessed foods)</option>
+                            <option value="excellent">Excellent (whole foods, balanced nutrition)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Processed Food Intake -->
+                    <div class="form-group">
+                        <label for="processed-food">Processed Food Consumption</label>
+                        <select id="processed-food" name="processed-food">
+                            <option value="">Select</option>
+                            <option value="high">High (daily)</option>
+                            <option value="moderate">Moderate (several times weekly)</option>
+                            <option value="low">Low (rarely)</option>
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Sugar Intake -->
+                    <div class="form-group">
+                        <label for="sugar-intake">Added Sugar Intake</label>
+                        <select id="sugar-intake" name="sugar-intake">
+                            <option value="">Select</option>
+                            <option value="high">High (daily sugary foods/drinks)</option>
+                            <option value="moderate">Moderate (occasional sugary foods/drinks)</option>
+                            <option value="low">Low (rarely consume added sugar)</option>
+                            <option value="none">None (avoid added sugar)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Water Consumption -->
+                    <div class="form-group">
+                        <label for="water-intake">Daily Water Consumption</label>
+                        <select id="water-intake" name="water-intake">
+                            <option value="">Select</option>
+                            <option value="low">Less than 1 liter</option>
+                            <option value="moderate">1-2 liters</option>
+                            <option value="optimal">2-3 liters</option>
+                            <option value="high">More than 3 liters</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Intermittent Fasting -->
+                    <div class="form-group">
+                        <label>Practice Intermittent Fasting</label>
+                        <div class="radio-group">
+                            <input type="radio" id="fasting-yes" name="fasting" value="yes">
+                            <label for="fasting-yes">Yes</label>
+                            
+                            <input type="radio" id="fasting-no" name="fasting" value="no" checked>
+                            <label for="fasting-no">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physical Activity Tab -->
+                <div class="tab-content" id="activity-tab">
+                    <h2>Physical Activity</h2>
+                    
+                    <!-- Exercise Frequency -->
+                    <div class="form-group">
+                        <label for="exercise">Exercise Frequency</label>
+                        <select id="exercise" name="exercise" required>
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="occasional">Occasional (1-2 times/week)</option>
+                            <option value="regular">Regular (3-5 times/week)</option>
+                            <option value="daily">Daily</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Exercise Intensity -->
+                    <div class="form-group">
+                        <label for="exercise-intensity">Exercise Intensity</label>
+                        <select id="exercise-intensity" name="exercise-intensity">
+                            <option value="">Select</option>
+                            <option value="low">Low (walking, gentle yoga)</option>
+                            <option value="moderate">Moderate (jogging, cycling)</option>
+                            <option value="high">High (HIIT, running, strength training)</option>
+                            <option value="varied">Varied (mix of intensities)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Strength Training -->
+                    <div class="form-group">
+                        <label for="strength-training">Strength Training Frequency</label>
+                        <select id="strength-training" name="strength-training">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="occasional">Occasional (1x/week)</option>
+                            <option value="regular">Regular (2-3x/week)</option>
+                            <option value="frequent">Frequent (4+ times/week)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Daily Movement -->
+                    <div class="form-group">
+                        <label for="daily-movement">Non-Exercise Daily Movement</label>
+                        <select id="daily-movement" name="daily-movement">
+                            <option value="">Select</option>
+                            <option value="sedentary">Sedentary (mostly sitting)</option>
+                            <option value="low">Low (occasional walking)</option>
+                            <option value="moderate">Moderate (regular walking/standing)</option>
+                            <option value="high">High (active job, frequent movement)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Lifestyle Tab -->
+                <div class="tab-content" id="lifestyle-tab">
+                    <h2>Lifestyle Factors</h2>
+                    
+                    <!-- Smoking Status -->
+                    <div class="form-group">
+                        <label>Smoking Status</label>
+                        <div class="radio-group">
+                            <input type="radio" id="smoker-yes" name="smoker" value="yes">
+                            <label for="smoker-yes">Yes</label>
+                            
+                            <input type="radio" id="smoker-no" name="smoker" value="no" checked>
+                            <label for="smoker-no">No</label>
+                            
+                            <input type="radio" id="smoker-former" name="smoker" value="former">
+                            <label for="smoker-former">Former</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Alcohol Consumption -->
+                    <div class="form-group">
+                        <label for="alcohol">Alcohol Consumption</label>
+                        <select id="alcohol" name="alcohol">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="light">Light (1-2 drinks/week)</option>
+                            <option value="moderate">Moderate (3-7 drinks/week)</option>
+                            <option value="heavy">Heavy (8-14 drinks/week)</option>
+                            <option value="excessive">Excessive (15+ drinks/week)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Sleep Hours -->
+                    <div class="form-group">
+                        <label for="sleep">Sleep Hours per Night</label>
+                        <select id="sleep" name="sleep" required>
+                            <option value="">Select</option>
+                            <option value="less">Less than 6 hours</option>
+                            <option value="optimal">7-9 hours</option>
+                            <option value="more">More than 9 hours</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Sleep Quality -->
+                    <div class="form-group">
+                        <label for="sleep-quality">Sleep Quality</label>
+                        <select id="sleep-quality" name="sleep-quality">
+                            <option value="">Select</option>
+                            <option value="poor">Poor (frequent waking, unrefreshed)</option>
+                            <option value="average">Average (occasional disturbances)</option>
+                            <option value="good">Good (consistent, refreshing sleep)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Stress Level -->
+                    <div class="form-group">
+                        <label for="stress">Stress Level</label>
+                        <select id="stress" name="stress">
+                            <option value="">Select</option>
+                            <option value="low">Low (rarely feel stressed)</option>
+                            <option value="moderate">Moderate (occasional stress)</option>
+                            <option value="high">High (frequently stressed)</option>
+                            <option value="severe">Severe (constant stress)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Social Connections -->
+                    <div class="form-group">
+                        <label for="social">Social Connections</label>
+                        <select id="social" name="social">
+                            <option value="">Select</option>
+                            <option value="isolated">Isolated (little social contact)</option>
+                            <option value="limited">Limited (occasional social interaction)</option>
+                            <option value="moderate">Moderate (regular social contact)</option>
+                            <option value="strong">Strong (robust social network)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mental Stimulation -->
+                    <div class="form-group">
+                        <label for="mental-activity">Mental Stimulation/Learning</label>
+                        <select id="mental-activity" name="mental-activity">
+                            <option value="">Select</option>
+                            <option value="low">Low (little mental challenge)</option>
+                            <option value="moderate">Moderate (occasional learning)</option>
+                            <option value="high">High (frequent learning/challenges)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mindfulness Practice -->
+                    <div class="form-group">
+                        <label for="mindfulness">Meditation/Mindfulness Practice</label>
+                        <select id="mindfulness" name="mindfulness">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="occasional">Occasional (< 3 times/week)</option>
+                            <option value="regular">Regular (3-5 times/week)</option>
+                            <option value="daily">Daily practice</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Environment Tab -->
+                <div class="tab-content" id="environment-tab">
+                    <h2>Environmental Factors</h2>
+                    
+                    <!-- Outdoor Time -->
+                    <div class="form-group">
+                        <label for="outdoor-time">Daily Outdoor Time</label>
+                        <select id="outdoor-time" name="outdoor-time">
+                            <option value="">Select</option>
+                            <option value="minimal">Minimal (< 30 minutes)</option>
+                            <option value="moderate">Moderate (30-60 minutes)</option>
+                            <option value="significant">Significant (1-2 hours)</option>
+                            <option value="extensive">Extensive (2+ hours)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Nature Exposure -->
+                    <div class="form-group">
+                        <label for="nature-exposure">Nature Exposure</label>
+                        <select id="nature-exposure" name="nature-exposure">
+                            <option value="">Select</option>
+                            <option value="rare">Rare (urban environment, little nature)</option>
+                            <option value="occasional">Occasional (weekly park visits)</option>
+                            <option value="frequent">Frequent (live near/regularly visit nature)</option>
+                            <option value="immersive">Immersive (live in natural setting)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Sun Exposure -->
+                    <div class="form-group">
+                        <label for="sun-exposure">Sun Exposure</label>
+                        <select id="sun-exposure" name="sun-exposure">
+                            <option value="">Select</option>
+                            <option value="minimal">Minimal (mostly indoors)</option>
+                            <option value="moderate-protected">Moderate with sun protection</option>
+                            <option value="moderate-unprotected">Moderate without sun protection</option>
+                            <option value="high-protected">High with sun protection</option>
+                            <option value="high-unprotected">High without sun protection</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Air Quality -->
+                    <div class="form-group">
+                        <label for="air-quality">Air Quality in Living Area</label>
+                        <select id="air-quality" name="air-quality">
+                            <option value="">Select</option>
+                            <option value="poor">Poor (urban/industrial pollution)</option>
+                            <option value="moderate">Moderate (suburban/mixed)</option>
+                            <option value="good">Good (clean air region)</option>
+                            <option value="excellent">Excellent (pristine air quality)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Screen Time -->
+                    <div class="form-group">
+                        <label for="screen-time">Daily Screen Time</label>
+                        <select id="screen-time" name="screen-time">
+                            <option value="">Select</option>
+                            <option value="low">Low (< 2 hours/day)</option>
+                            <option value="moderate">Moderate (2-4 hours/day)</option>
+                            <option value="high">High (4-8 hours/day)</option>
+                            <option value="excessive">Excessive (8+ hours/day)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Blue Light Protection -->
+                    <div class="form-group">
+                        <label>Use Blue Light Protection</label>
+                        <div class="radio-group">
+                            <input type="radio" id="blue-light-yes" name="blue-light" value="yes">
+                            <label for="blue-light-yes">Yes</label>
+                            
+                            <input type="radio" id="blue-light-no" name="blue-light" value="no" checked>
+                            <label for="blue-light-no">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Tab -->
+                <div class="tab-content" id="medical-tab">
+                    <h2>Medical Factors</h2>
+                    
+                    <!-- Chronic Conditions -->
+                    <div class="form-group">
+                        <label>Do you have any chronic health conditions?</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condition-diabetes" name="conditions[]" value="diabetes">
+                                <label for="condition-diabetes">Diabetes</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condition-hypertension" name="conditions[]" value="hypertension">
+                                <label for="condition-hypertension">Hypertension</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condition-heart" name="conditions[]" value="heart-disease">
+                                <label for="condition-heart">Heart Disease</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condition-autoimmune" name="conditions[]" value="autoimmune">
+                                <label for="condition-autoimmune">Autoimmune Disorder</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condition-cancer" name="conditions[]" value="cancer">
+                                <label for="condition-cancer">Cancer (past or present)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condition-respiratory" name="conditions[]" value="respiratory">
+                                <label for="condition-respiratory">Respiratory Disease</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="condition-mental" name="conditions[]" value="mental-health">
+                                <label for="condition-mental">Mental Health Condition</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Medication Use -->
+                    <div class="form-group">
+                        <label for="medications">Regular Medication Use</label>
+                        <select id="medications" name="medications">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="one">One medication</option>
+                            <option value="few">2-3 medications</option>
+                            <option value="multiple">4+ medications</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Family Longevity -->
+                    <div class="form-group">
+                        <label for="family-longevity">Family History of Longevity</label>
+                        <select id="family-longevity" name="family-longevity">
+                            <option value="">Select</option>
+                            <option value="short">Short-lived parents/grandparents (< 70 years)</option>
+                            <option value="average">Average lifespan (70-85 years)</option>
+                            <option value="long">Long-lived parents/grandparents (85+ years)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Regular Checkups -->
+                    <div class="form-group">
+                        <label for="checkups">Regular Health Checkups</label>
+                        <select id="checkups" name="checkups">
+                            <option value="">Select</option>
+                            <option value="never">Never/Rarely</option>
+                            <option value="occasional">Occasional (every few years)</option>
+                            <option value="regular">Regular (annual)</option>
+                            <option value="comprehensive">Comprehensive (annual with detailed testing)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Supplementation -->
+                    <div class="form-group">
+                        <label for="supplements">Dietary Supplement Use</label>
+                        <select id="supplements" name="supplements">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="basic">Basic (multivitamin only)</option>
+                            <option value="moderate">Moderate (2-3 targeted supplements)</option>
+                            <option value="extensive">Extensive (comprehensive regimen)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" id="prev-btn" class="nav-btn">Previous</button>
+                    <button type="button" id="next-btn" class="nav-btn">Next</button>
+                    <button type="submit" id="submit-btn" class="calculate-btn">Calculate My Biological Age</button>
+                </div>
+            </form>
+            
+            <div id="results" class="hidden">
+                <h2>Your Results</h2>
+                <div class="age-comparison">
+                    <div class="age-box">
+                        <h3>Chronological Age</h3>
+                        <p id="chronological-age">--</p>
+                    </div>
+                    <div class="age-box highlight">
+                        <h3>Biological Age</h3>
+                        <p id="biological-age">--</p>
+                    </div>
+                </div>
+                <div class="age-difference">
+                    <p id="age-difference-text">Your biological age is <span id="age-difference">--</span> your chronological age.</p>
+                </div>
+                
+                <!-- Chart container -->
+                <div id="factors-chart-container" class="chart-container">
+                    <h3>Impact of Lifestyle Factors</h3>
+                    <canvas id="factors-chart"></canvas>
+                </div>
+                
+                <div class="category-scores">
+                    <h3>Category Breakdown</h3>
+                    <div class="score-bars">
+                        <div class="score-bar-container">
+                            <label>Basic Factors</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="basic-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="basic-score-value">--</span>
+                        </div>
+                        <div class="score-bar-container">
+                            <label>Diet & Nutrition</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="diet-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="diet-score-value">--</span>
+                        </div>
+                        <div class="score-bar-container">
+                            <label>Physical Activity</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="activity-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="activity-score-value">--</span>
+                        </div>
+                        <div class="score-bar-container">
+                            <label>Lifestyle</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="lifestyle-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="lifestyle-score-value">--</span>
+                        </div>
+                        <div class="score-bar-container">
+                            <label>Environment</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="environment-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="environment-score-value">--</span>
+                        </div>
+                        <div class="score-bar-container">
+                            <label>Medical</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="medical-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="medical-score-value">--</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>Personalized Recommendations</h3>
+                    <ul id="recommendations-list">
+                        <!-- Recommendations will be inserted here -->
+                    </ul>
+                </div>
+                
+                <div class="results-actions">
+                    <button id="print-results" class="action-btn">Print Results</button>
+                    <button id="save-results" class="action-btn">Save Results</button>
+                </div>
+                
+                <div id="history-container" class="hidden">
+                    <h3>Previous Calculations</h3>
+                    <div id="history-list">
+                        <!-- History entries will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 Advanced Biological Age Calculator | Created With AI Agents</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript files -->
+    <script src="js/calculator.js"></script>
+    <script src="js/recommendations.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

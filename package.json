@@ -1,0 +1,22 @@
+{
+    "name": "longevity-calculator",
+    "version": "1.0.0",
+    "description": "A web-based biological age calculator that estimates your biological age based on lifestyle factors",
+    "main": "src/index.html",
+    "scripts": {
+      "test": "echo \"Open tests/test.html in your browser to run tests\"",
+      "start": "echo \"Open src/index.html in your browser to run the application\""
+    },
+    "keywords": [
+      "longevity",
+      "health",
+      "calculator",
+      "biological-age"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+      "chart.js": "^4.3.0"
+    },
+    "devDependencies": {}
+  }
