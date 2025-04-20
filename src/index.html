@@ -6,6 +6,10 @@
     <title>Advanced Biological Age Calculator</title>
     <!-- Favicon -->
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- CSS imports with modular structure -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/form.css">
@@ -17,12 +21,53 @@
     <div class="container">
         <header>
             <img src="../assets/images/logo2.svg" alt="Longevity Calculator Logo" class="logo" height="200">
+            <h1>Advanced Biological Age Calculator</h1>
             <p>Discover your biological age based on comprehensive lifestyle factors</p>
         </header>
         
+        <!-- Hero section with additional context and start button -->
+        <div class="hero-section">
+            <h2>Unlock Your Biological Age Insights</h2>
+            <p>This calculator combines cutting-edge research in longevity science to assess how your lifestyle choices, environment, and genetics affect your biological aging process.</p>
+            <div class="hero-features">
+                <div class="feature">
+                    <span class="feature-icon">📊</span>
+                    <h3>Comprehensive Assessment</h3>
+                    <p>Evaluates 7 key areas affecting your biological age</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🔬</span>
+                    <h3>Science-Based</h3>
+                    <p>Built on peer-reviewed longevity research</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Actionable Insights</h3>
+                    <p>Get personalized recommendations to improve your biological age</p>
+                </div>
+            </div>
+            <button id="start-assessment-btn" class="hero-cta">Start Your Assessment</button>
+        </div>
+        
         <main>
-            <!-- Main form with tabs for different factor categories -->
-            <form id="calculator-form">
+            <!-- Main form with tabs for different factor categories - hidden initially -->
+            <form id="calculator-form" class="card hidden">
+                <!-- Progress indicator -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-steps">
+                        <span class="progress-step active" data-step="1">Basic</span>
+                        <span class="progress-step" data-step="2">Diet</span>
+                        <span class="progress-step" data-step="3">Activity</span>
+                        <span class="progress-step" data-step="4">Lifestyle</span>
+                        <span class="progress-step" data-step="5">Environment</span>
+                        <span class="progress-step" data-step="6">Medical</span>
+                        <span class="progress-step" data-step="7">Mental Health</span>
+                    </div>
+                </div>
+                
                 <div class="form-tabs">
                     <button type="button" class="tab-button active" data-tab="basic">Basic Info</button>
                     <button type="button" class="tab-button" data-tab="diet">Diet & Nutrition</button>
@@ -30,6 +75,7 @@
                     <button type="button" class="tab-button" data-tab="lifestyle">Lifestyle</button>
                     <button type="button" class="tab-button" data-tab="environment">Environment</button>
                     <button type="button" class="tab-button" data-tab="medical">Medical</button>
+                    <button type="button" class="tab-button" data-tab="mental-health">Mental Health</button>
                 </div>
 
                 <!-- Basic Information Tab -->
@@ -38,13 +84,13 @@
                     
                     <!-- Age input -->
                     <div class="form-group">
-                        <label for="age">Chronological Age</label>
+                        <label for="age" class="required">Chronological Age</label>
                         <input type="number" id="age" name="age" min="18" max="120" required>
                     </div>
                     
                     <!-- Gender selection -->
                     <div class="form-group">
-                        <label for="gender">Gender</label>
+                        <label for="gender" class="required">Gender</label>
                         <select id="gender" name="gender" required>
                             <option value="">Select</option>
                             <option value="male">Male</option>
@@ -467,6 +513,144 @@
                     </div>
                 </div>
 
+                <!-- Mental Health Tab -->
+                <div class="tab-content" id="mental-health-tab">
+                    <h2>Mental Health & Social Wellbeing</h2>
+                    
+                    <!-- Stress Level Assessment -->
+                    <div class="form-group">
+                        <label for="stress">Stress Level</label>
+                        <select id="stress" name="stress">
+                            <option value="">Select</option>
+                            <option value="low">Low (rarely feel stressed)</option>
+                            <option value="moderate">Moderate (occasional stress)</option>
+                            <option value="high">High (frequently stressed)</option>
+                            <option value="severe">Severe (constant stress)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Anxiety Assessment -->
+                    <div class="form-group">
+                        <label for="anxiety">Anxiety Level</label>
+                        <select id="anxiety" name="anxiety">
+                            <option value="">Select</option>
+                            <option value="minimal">Minimal (rarely feel anxious)</option>
+                            <option value="mild">Mild (occasional anxiety)</option>
+                            <option value="moderate">Moderate (regular anxiety)</option>
+                            <option value="severe">Severe (frequent, intense anxiety)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Depression Assessment -->
+                    <div class="form-group">
+                        <label for="depression">Depression/Low Mood</label>
+                        <select id="depression" name="depression">
+                            <option value="">Select</option>
+                            <option value="minimal">Minimal (rarely feel down)</option>
+                            <option value="mild">Mild (occasionally feel down)</option>
+                            <option value="moderate">Moderate (regularly feel down)</option>
+                            <option value="severe">Severe (persistent low mood)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mental Health Condition -->
+                    <div class="form-group">
+                        <label for="mental-health-condition">Mental Health Condition</label>
+                        <select id="mental-health-condition" name="mental-health-condition">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="managed">Yes, well-managed with treatment</option>
+                            <option value="unmanaged">Yes, not currently well-managed</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Mindfulness Practice -->
+                    <div class="form-group">
+                        <label for="mindfulness">Meditation/Mindfulness Practice</label>
+                        <select id="mindfulness" name="mindfulness">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="occasional">Occasional (< 3 times/week)</option>
+                            <option value="regular">Regular (3-5 times/week)</option>
+                            <option value="daily">Daily practice</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Life Satisfaction -->
+                    <div class="form-group">
+                        <label for="life-satisfaction">Overall Life Satisfaction</label>
+                        <select id="life-satisfaction" name="life-satisfaction">
+                            <option value="">Select</option>
+                            <option value="low">Low (generally dissatisfied)</option>
+                            <option value="moderate">Moderate (somewhat satisfied)</option>
+                            <option value="high">High (generally satisfied)</option>
+                            <option value="very-high">Very High (very satisfied)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Purpose and Meaning -->
+                    <div class="form-group">
+                        <label for="purpose">Sense of Purpose/Meaning</label>
+                        <select id="purpose" name="purpose">
+                            <option value="">Select</option>
+                            <option value="low">Low (rarely feel purpose)</option>
+                            <option value="moderate">Moderate (sometimes feel purpose)</option>
+                            <option value="high">High (regular sense of purpose)</option>
+                            <option value="very-high">Very High (strong, consistent purpose)</option>
+                        </select>
+                    </div>
+                    
+                    <h3>Social Connection</h3>
+                    
+                    <!-- Social Connections -->
+                    <div class="form-group">
+                        <label for="social">Overall Social Connections</label>
+                        <select id="social" name="social">
+                            <option value="">Select</option>
+                            <option value="isolated">Isolated (little social contact)</option>
+                            <option value="limited">Limited (occasional social interaction)</option>
+                            <option value="moderate">Moderate (regular social contact)</option>
+                            <option value="strong">Strong (robust social network)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Close Relationships -->
+                    <div class="form-group">
+                        <label for="close-relationships">Close Relationships</label>
+                        <select id="close-relationships" name="close-relationships">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="few">Few (1-2 close relationships)</option>
+                            <option value="several">Several (3-5 close relationships)</option>
+                            <option value="many">Many (6+ close relationships)</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Community Involvement -->
+                    <div class="form-group">
+                        <label for="community-involvement">Community Involvement</label>
+                        <select id="community-involvement" name="community-involvement">
+                            <option value="">Select</option>
+                            <option value="none">None</option>
+                            <option value="occasional">Occasional participation</option>
+                            <option value="regular">Regular participation</option>
+                            <option value="active">Active leadership/engagement</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Loneliness Assessment -->
+                    <div class="form-group">
+                        <label for="loneliness">Feelings of Loneliness</label>
+                        <select id="loneliness" name="loneliness">
+                            <option value="">Select</option>
+                            <option value="rarely">Rarely feel lonely</option>
+                            <option value="sometimes">Sometimes feel lonely</option>
+                            <option value="often">Often feel lonely</option>
+                            <option value="always">Almost always feel lonely</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-navigation">
                     <button type="button" id="prev-btn" class="nav-btn">Previous</button>
                     <button type="button" id="next-btn" class="nav-btn">Next</button>
@@ -475,28 +659,47 @@
             </form>
             
             <div id="results" class="hidden">
-                <h2>Your Results</h2>
+                <h2>Your Longevity Results</h2>
                 <div class="age-comparison">
                     <div class="age-box">
                         <h3>Chronological Age</h3>
                         <p id="chronological-age">--</p>
                     </div>
-                    <div class="age-box highlight">
+                    <div class="age-box highlight pulse-glow">
                         <h3>Biological Age</h3>
                         <p id="biological-age">--</p>
+                        <p class="confidence-text">Confidence interval: <span id="confidence-interval">±2</span></p>
                     </div>
                 </div>
                 <div class="age-difference">
                     <p id="age-difference-text">Your biological age is <span id="age-difference">--</span> your chronological age.</p>
                 </div>
                 
-                <!-- Chart container -->
-                <div id="factors-chart-container" class="chart-container">
+                <!-- Chart containers with fade-in animation -->
+                <div id="factors-chart-container" class="chart-container fade-in">
                     <h3>Impact of Lifestyle Factors</h3>
                     <canvas id="factors-chart"></canvas>
                 </div>
                 
-                <div class="category-scores">
+                <!-- New trajectory chart container -->
+                <div id="trajectory-chart-container" class="chart-container">
+                    <h3>Health Trajectory Projection</h3>
+                    <canvas id="trajectory-chart"></canvas>
+                </div>
+                
+                <!-- New body map visualization container -->
+                <div id="body-map-container" class="chart-container">
+                    <h3>Impact on Body Systems</h3>
+                    <!-- Interactive body map will be inserted here -->
+                </div>
+                
+                <!-- Category radar chart -->
+                <div id="category-radar-container" class="chart-container">
+                    <h3>Category Overview</h3>
+                    <canvas id="category-radar-chart"></canvas>
+                </div>
+                
+                <div class="category-scores fade-in">
                     <h3>Category Breakdown</h3>
                     <div class="score-bars">
                         <div class="score-bar-container">
@@ -541,10 +744,67 @@
                             </div>
                             <span class="score-value" id="medical-score-value">--</span>
                         </div>
+                        <!-- New category scores for Mental Health and Social Connection -->
+                        <div class="score-bar-container">
+                            <label>Mental Health</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="mentalHealth-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="mentalHealth-score-value">--</span>
+                        </div>
+                        <div class="score-bar-container">
+                            <label>Social Connection</label>
+                            <div class="score-bar">
+                                <div class="score-fill" id="socialConnection-score-fill"></div>
+                            </div>
+                            <span class="score-value" id="socialConnection-score-value">--</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="recommendations">
+                <!-- Intervention simulator section -->
+                <div id="intervention-simulator" class="simulator-container fade-in">
+                    <h3>Intervention Simulator</h3>
+                    <p>See how lifestyle changes could affect your biological age</p>
+                    
+                    <div class="intervention-options">
+                        <div class="intervention-option">
+                            <label for="intervention1">Change 1:</label>
+                            <select id="intervention1" class="intervention-select" data-factor="exercise">
+                                <option value="none">Select an intervention...</option>
+                                <option value="occasional">Start exercising 1-2 times/week</option>
+                                <option value="regular">Start exercising 3-5 times/week</option>
+                                <option value="daily">Start exercising daily</option>
+                            </select>
+                        </div>
+                        
+                        <div class="intervention-option">
+                            <label for="intervention2">Change 2:</label>
+                            <select id="intervention2" class="intervention-select" data-factor="diet-quality">
+                                <option value="none">Select an intervention...</option>
+                                <option value="good">Improve diet quality</option>
+                                <option value="excellent">Significantly improve diet</option>
+                            </select>
+                        </div>
+                        
+                        <div class="intervention-option">
+                            <label for="intervention3">Change 3:</label>
+                            <select id="intervention3" class="intervention-select" data-factor="stress">
+                                <option value="none">Select an intervention...</option>
+                                <option value="moderate">Reduce stress to moderate levels</option>
+                                <option value="low">Reduce stress to low levels</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="simulate-btn">Simulate Changes</button>
+                    
+                    <div id="intervention-results" class="hidden">
+                        <!-- Results will be inserted here by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="recommendations fade-in">
                     <h3>Personalized Recommendations</h3>
                     <ul id="recommendations-list">
                         <!-- Recommendations will be inserted here -->
@@ -554,9 +814,10 @@
                 <div class="results-actions">
                     <button id="print-results" class="action-btn">Print Results</button>
                     <button id="save-results" class="action-btn">Save Results</button>
+                    <button id="share-results" class="action-btn">Share Results</button>
                 </div>
                 
-                <div id="history-container" class="hidden">
+                <div id="history-container" class="hidden fade-in">
                     <h3>Previous Calculations</h3>
                     <div id="history-list">
                         <!-- History entries will be inserted here -->
@@ -566,7 +827,8 @@
         </main>
         
         <footer>
-            <p>© 2025 Advanced Biological Age Calculator | Created With AI Agents</p>
+            <p>© 2025 Advanced Biological Age Calculator | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+            <p>Created with 💙 by AI Agents | Based on longevity research</p>
         </footer>
     </div>
     

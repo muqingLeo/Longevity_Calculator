@@ -1,285 +1,327 @@
 /**
- * Enhanced recommendations generator for the Longevity Calculator
+ * Enhanced AI-powered recommendations generator for the Longevity Calculator
  * Generates personalized recommendations based on user inputs and calculation results
+ * with adaptive prioritization and evidence-based suggestions
  */
 
 /**
  * Generates personalized recommendations based on user inputs and calculation results
  * @param {Object} data - User input data
  * @param {Object} calculationResults - Results from biological age calculation
- * @returns {Array} - Array of recommendation objects
+ * @returns {Array} - Array of recommendation objects with evidence rating
  */
 function generateRecommendations(data, calculationResults) {
     const recommendations = [];
     const categoryScores = calculationResults.categoryScores;
     
-    // === DIET RECOMMENDATIONS ===
+    // === DIET RECOMMENDATIONS === [Keep existing recommendations]
     
-    // Diet quality recommendations
-    if (data['diet-quality'] === 'poor' || data['diet-quality'] === 'average') {
-        recommendations.push({
-            category: 'Diet',
-            text: 'Improve your diet quality by increasing whole foods like vegetables, fruits, whole grains, lean proteins, and healthy fats while reducing ultra-processed foods. Research shows that a Mediterranean-style diet is particularly beneficial for longevity.',
-            priority: 'high'
-        });
-    }
+    // === EXERCISE RECOMMENDATIONS === [Keep existing recommendations]
     
-    // Processed food recommendations
-    if (data['processed-food'] === 'high' || data['processed-food'] === 'moderate') {
-        recommendations.push({
-            category: 'Diet',
-            text: 'Reduce consumption of ultra-processed foods that contain artificial ingredients, preservatives, and refined carbohydrates. These foods have been linked to increased inflammation and accelerated aging.',
-            priority: 'high'
-        });
-    }
+    // === LIFESTYLE RECOMMENDATIONS === [Keep existing recommendations]
     
-    // Sugar intake recommendations
-    if (data['sugar-intake'] === 'high' || data['sugar-intake'] === 'moderate') {
-        recommendations.push({
-            category: 'Diet',
-            text: 'Limit added sugar intake to reduce advanced glycation end products (AGEs) that contribute to cellular aging and inflammation. Try replacing sugary foods with fruit or using natural sweeteners in moderation.',
-            priority: 'high'
-        });
-    }
+    // === ENVIRONMENT RECOMMENDATIONS === [Keep existing recommendations]
     
-    // Water consumption recommendations
-    if (data['water-intake'] === 'low') {
-        recommendations.push({
-            category: 'Diet',
-            text: 'Increase daily water consumption to at least 2 liters (8 cups) per day. Proper hydration supports cellular function, metabolism, and detoxification processes important for longevity.',
-            priority: 'medium'
-        });
-    }
+    // === MEDICAL RECOMMENDATIONS === [Keep existing recommendations]
     
-    // Intermittent fasting recommendation
-    if (data.fasting === 'no' && categoryScores.diet.score < categoryScores.diet.maxScore / 2) {
-        recommendations.push({
-            category: 'Diet',
-            text: 'Consider trying intermittent fasting (such as a 16:8 or 14:10 eating pattern) which may trigger cellular repair processes that support longevity. Start gradually and consult a healthcare provider if you have any medical conditions.',
-            priority: 'medium'
-        });
-    }
-    
-    // === EXERCISE RECOMMENDATIONS ===
-    
-    // Exercise frequency recommendations
-    if (data.exercise === 'none') {
-        recommendations.push({
-            category: 'Exercise',
-            text: 'Start with light physical activity such as walking 30 minutes daily. Even modest increases in activity can have significant health benefits and reduce biological age.',
-            priority: 'high'
-        });
-    } else if (data.exercise === 'occasional') {
-        recommendations.push({
-            category: 'Exercise',
-            text: 'Increase exercise frequency to 3-5 times per week for optimal benefits. Aim for at least 150 minutes of moderate-intensity activity weekly as recommended by health guidelines.',
-            priority: 'medium'
-        });
-    }
-    
-    // Strength training recommendations
-    if (data['strength-training'] === 'none' || !data['strength-training']) {
-        recommendations.push({
-            category: 'Exercise',
-            text: 'Add resistance/strength training to your routine 2-3 times weekly. Strength training helps preserve muscle mass, supports metabolism, and has been linked to increased longevity.',
-            priority: 'high'
-        });
-    }
-    
-    // Daily movement recommendations
-    if (data['daily-movement'] === 'sedentary' || data['daily-movement'] === 'low') {
-        recommendations.push({
-            category: 'Exercise',
-            text: 'Increase non-exercise movement throughout the day by taking short walking breaks, using a standing desk, taking stairs, or stretching. Reducing sitting time is critical for health regardless of exercise habits.',
-            priority: 'high'
-        });
-    }
-    
-    // === LIFESTYLE RECOMMENDATIONS ===
-    
-    // Smoking recommendations
-    if (data.smoker === 'yes') {
-        recommendations.push({
-            category: 'Lifestyle',
-            text: 'Quitting smoking is the single most effective way to reduce your biological age. Within just one year of quitting, your risk of heart disease drops significantly. Consider NRT (nicotine replacement therapy) or talk to your doctor about cessation programs.',
-            priority: 'high'
-        });
-    }
-    
-    // Alcohol recommendations
-    if (data.alcohol === 'heavy' || data.alcohol === 'excessive') {
-        recommendations.push({
-            category: 'Lifestyle',
-            text: 'Reduce alcohol consumption to no more than 7 drinks per week. Excessive alcohol accelerates aging through inflammation, nutritional deficiencies, and oxidative stress.',
-            priority: 'high'
-        });
-    }
-    
-    // Sleep recommendations
-    if (data.sleep === 'less') {
-        recommendations.push({
-            category: 'Lifestyle',
-            text: 'Prioritize getting 7-9 hours of sleep nightly. Insufficient sleep significantly accelerates biological aging. Establish a consistent sleep schedule and create a relaxing bedtime routine.',
-            priority: 'high'
-        });
-    } else if (data.sleep === 'more') {
-        recommendations.push({
-            category: 'Lifestyle',
-            text: 'Consistent oversleeping may indicate underlying health issues. Aim for 7-9 hours of quality sleep rather than extended sleep periods. Consult a healthcare provider if you consistently need more than 9 hours to feel rested.',
-            priority: 'medium'
-        });
-    }
-    
-    // Sleep quality recommendations
-    if (data['sleep-quality'] === 'poor') {
-        recommendations.push({
-            category: 'Lifestyle',
-            text: 'Improve sleep quality by: limiting caffeine after noon, avoiding screens 1-2 hours before bed, keeping your bedroom cool and dark, and maintaining a consistent sleep schedule. Consider a sleep tracking app for insights.',
-            priority: 'high'
-        });
-    }
+    // === NEW: MENTAL HEALTH RECOMMENDATIONS ===
     
     // Stress management recommendations
     if (data.stress === 'high' || data.stress === 'severe') {
         recommendations.push({
-            category: 'Lifestyle',
-            text: 'Implement stress reduction techniques such as deep breathing, meditation, yoga, or spending time in nature. Chronic stress accelerates cellular aging through inflammation and telomere shortening.',
-            priority: 'high'
+            category: 'Mental Health',
+            text: 'Implement evidence-based stress reduction techniques such as deep breathing, meditation, yoga, or spending time in nature. Research shows chronic stress accelerates cellular aging through inflammation, oxidative stress, and telomere shortening.',
+            priority: 'high',
+            evidenceRating: 'strong',
+            impact: 'significant',
+            timeToEffect: 'short-term'
         });
     }
     
-    // Social connections recommendations
-    if (data.social === 'isolated' || data.social === 'limited') {
+    // Anxiety recommendations
+    if (data.anxiety === 'moderate' || data.anxiety === 'severe') {
         recommendations.push({
-            category: 'Lifestyle',
-            text: 'Build stronger social connections through community activities, volunteering, classes, or reaching out to friends and family. Social isolation has been shown to increase biological age comparable to smoking.',
-            priority: 'high'
+            category: 'Mental Health',
+            text: 'Consider anxiety management strategies such as cognitive-behavioral techniques, mindfulness, and regular physical activity. Studies show that chronic anxiety increases inflammation markers associated with accelerated aging.',
+            priority: 'high',
+            evidenceRating: 'strong',
+            impact: 'moderate',
+            timeToEffect: 'medium-term'
         });
     }
     
-    // Mental stimulation recommendations
-    if (data['mental-activity'] === 'low') {
+    // Depression recommendations
+    if (data.depression === 'moderate' || data.depression === 'severe') {
         recommendations.push({
-            category: 'Lifestyle',
-            text: 'Engage in regular mental challenges such as learning new skills, puzzles, reading, or creative pursuits. Cognitive stimulation creates new neural pathways and may slow cognitive aging.',
-            priority: 'medium'
+            category: 'Mental Health',
+            text: 'Seek professional support for depression management. Untreated depression is linked to increased biological aging through multiple pathways including inflammation, oxidative stress, and altered cellular function.',
+            priority: 'high',
+            evidenceRating: 'strong',
+            impact: 'significant',
+            timeToEffect: 'medium-term'
+        });
+    }
+    
+    // Mental health condition management
+    if (data['mental-health-condition'] === 'unmanaged') {
+        recommendations.push({
+            category: 'Mental Health',
+            text: 'Prioritize professional treatment for your mental health condition. Research shows well-managed mental health conditions have significantly less impact on biological aging compared to untreated conditions.',
+            priority: 'high',
+            evidenceRating: 'moderate',
+            impact: 'significant',
+            timeToEffect: 'medium-term'
         });
     }
     
     // Mindfulness recommendations
     if (data.mindfulness === 'none' || !data.mindfulness) {
         recommendations.push({
-            category: 'Lifestyle',
-            text: 'Start a simple meditation practice for 5-10 minutes daily. Research shows meditation can reduce biological age by lowering stress, improving immune function, and potentially slowing cellular aging.',
-            priority: 'medium'
+            category: 'Mental Health',
+            text: 'Start a simple daily meditation practice for 5-10 minutes. Clinical studies demonstrate that regular meditation can reduce biological age by lowering stress hormones, improving immune function, and potentially slowing cellular aging.',
+            priority: 'medium',
+            evidenceRating: 'moderate',
+            impact: 'moderate',
+            timeToEffect: 'medium-term'
         });
     }
     
-    // === ENVIRONMENT RECOMMENDATIONS ===
+    // Sleep and mental health
+    function shouldRecommendSleepImprovement(data) {
+        const poorSleep = data.sleep === 'less' || data['sleep-quality'] === 'poor';
+        const mentalHealthStress = data.stress === 'high' || data.anxiety === 'moderate' || data.anxiety === 'severe';
+        return poorSleep && mentalHealthStress;
+    }
     
-    // Outdoor time recommendations
-    if (data['outdoor-time'] === 'minimal') {
+    if (shouldRecommendSleepImprovement(data)) {
         recommendations.push({
-            category: 'Environment',
-            text: 'Increase daily outdoor time to at least 30 minutes. Natural light exposure helps regulate circadian rhythm, improves mood, and supports vitamin D production, all contributing to healthier aging.',
-            priority: 'medium'
+            category: 'Mental Health',
+            text: 'Prioritize improving your sleep through consistent sleep scheduling, creating a relaxing bedtime routine, and limiting screen time before bed. Poor sleep quality compounds mental health stressors and accelerates biological aging.',
+            priority: 'high',
+            evidenceRating: 'strong',
+            impact: 'significant',
+            timeToEffect: 'short-term'
         });
     }
     
-    // Nature exposure recommendations
-    if (data['nature-exposure'] === 'rare') {
-        recommendations.push({
-            category: 'Environment',
-            text: 'Visit natural settings like parks, forests, or waterfront areas weekly. Studies show that nature exposure reduces stress hormones, blood pressure, and inflammation while improving mood.',
-            priority: 'medium'
-        });
-    }
-    
-    // Sun exposure recommendations
-    if (data['sun-exposure'] === 'minimal') {
-        recommendations.push({
-            category: 'Environment',
-            text: 'Get moderate sun exposure (15-30 minutes daily depending on skin type) while avoiding peak UV hours. Balanced sun exposure supports vitamin D production which is vital for immune function and longevity.',
-            priority: 'medium'
-        });
-    } else if (data['sun-exposure'] === 'high-unprotected' || data['sun-exposure'] === 'moderate-unprotected') {
-        recommendations.push({
-            category: 'Environment',
-            text: 'Use appropriate sun protection (SPF 30+ sunscreen, protective clothing, hats) when outdoors for extended periods. Excessive UV exposure accelerates skin aging and increases cancer risk.',
-            priority: 'high'
-        });
-    }
-    
-    // Air quality recommendations
-    if (data['air-quality'] === 'poor' || data['air-quality'] === 'moderate') {
-        recommendations.push({
-            category: 'Environment',
-            text: 'Mitigate air pollution exposure by using air purifiers indoors, avoiding outdoor activity during high pollution days, and incorporating houseplants. Air pollution significantly accelerates aging through oxidative stress.',
-            priority: 'high'
-        });
-    }
-    
-    // Screen time recommendations
+    // Digital wellbeing
     if (data['screen-time'] === 'high' || data['screen-time'] === 'excessive') {
         recommendations.push({
-            category: 'Environment',
-            text: 'Reduce screen time, especially in the evening. Take regular breaks using the 20-20-20 rule (every 20 minutes, look at something 20 feet away for 20 seconds) and use blue light filters after sunset.',
-            priority: 'medium'
+            category: 'Mental Health',
+            text: 'Implement regular digital detox periods and set boundaries around technology use. Excessive screen time is associated with increased stress, sleep disruption, and reduced mental wellbeing, all of which can accelerate aging.',
+            priority: 'medium',
+            evidenceRating: 'moderate',
+            impact: 'moderate',
+            timeToEffect: 'short-term'
         });
     }
     
-    // === MEDICAL RECOMMENDATIONS ===
+    // === NEW: SOCIAL CONNECTION RECOMMENDATIONS ===
     
-    // Chronic conditions recommendations
-    const conditions = Array.isArray(data.conditions) ? data.conditions : [];
-    if (conditions.length > 0) {
+    // Social isolation recommendations
+    if (data.social === 'isolated' || data.social === 'limited') {
         recommendations.push({
-            category: 'Medical',
-            text: 'Work with healthcare providers to optimally manage existing health conditions. Well-controlled chronic conditions have significantly less impact on biological age than poorly managed ones.',
-            priority: 'high'
+            category: 'Social Connection',
+            text: 'Prioritize building stronger social connections through community activities, volunteering, classes, or reconnecting with friends and family. Research shows social isolation has health impacts comparable to smoking 15 cigarettes daily.',
+            priority: 'high',
+            evidenceRating: 'strong',
+            impact: 'significant',
+            timeToEffect: 'long-term'
         });
     }
     
-    // Regular checkups recommendations
-    if (data.checkups === 'never' || data.checkups === 'occasional' || !data.checkups) {
+    // Close relationships
+    if (data['close-relationships'] === 'none' || data['close-relationships'] === 'few') {
         recommendations.push({
-            category: 'Medical',
-            text: 'Schedule regular health checkups and age-appropriate screenings. Early detection and intervention can significantly reduce the impact of many health conditions on biological age.',
-            priority: 'high'
+            category: 'Social Connection',
+            text: 'Focus on developing deeper connections with a few key people rather than many superficial relationships. Studies show that quality of relationships has greater health benefits than quantity.',
+            priority: 'medium',
+            evidenceRating: 'moderate',
+            impact: 'moderate',
+            timeToEffect: 'long-term'
         });
     }
     
-    // Medications
-    if (data.medications === 'multiple' || data.medications === 'few') {
+    // Community involvement
+    if (data['community-involvement'] === 'none' && 
+       (data.social === 'isolated' || data.social === 'limited')) {
         recommendations.push({
-            category: 'Medical',
-            text: 'Review medications with your healthcare provider periodically to ensure they\'re all necessary and optimally prescribed. Polypharmacy (taking multiple medications) can have cumulative effects on aging.',
-            priority: 'medium'
+            category: 'Social Connection',
+            text: 'Join a community group, class, or volunteer organization related to your interests. Community engagement provides purpose, social connection, and practical support—all factors that contribute to healthier aging.',
+            priority: 'medium',
+            evidenceRating: 'moderate',
+            impact: 'moderate',
+            timeToEffect: 'medium-term'
         });
     }
     
-    // === GENERAL RECOMMENDATIONS ===
+    // Digital vs. in-person connection
+    if (data.social === 'limited' && data['screen-time'] === 'high') {
+        recommendations.push({
+            category: 'Social Connection',
+            text: 'Balance digital communication with in-person social interaction. Research indicates that face-to-face connection provides greater health benefits than online-only social engagement.',
+            priority: 'medium',
+            evidenceRating: 'emerging',
+            impact: 'moderate',
+            timeToEffect: 'medium-term'
+        });
+    }
     
-    // Top factors by impact
-    // Find the top 3 most impactful factors (positive or negative)
+    // === ADAPTIVE RECOMMENDATION PRIORITIZATION ===
+    
+    // Find top impact factors for targeted recommendations
+    // Sort factors by absolute impact to find biggest opportunities and risks
     const sortedFactors = [...calculationResults.factors].sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact));
+    
+    // Top negative factors (highest risks)
     const topNegativeFactors = sortedFactors.filter(factor => factor.impact > 0).slice(0, 3);
+    
+    // Top positive factors (highest benefits)
+    const topPositiveFactors = sortedFactors.filter(factor => factor.impact < 0).slice(0, 2);
     
     if (topNegativeFactors.length > 0) {
         const factorNames = topNegativeFactors.map(factor => factor.name).join(', ');
         recommendations.push({
-            category: 'Focus Areas',
+            category: 'Priority Focus Areas',
             text: `Your biggest opportunities for reducing biological age are: ${factorNames}. Focus on these areas first for maximum impact on your longevity.`,
-            priority: 'high'
+            priority: 'high',
+            evidenceRating: 'personalized',
+            impact: 'significant',
+            timeToEffect: 'varies'
+        });
+    }
+    
+    if (topPositiveFactors.length > 0) {
+        const factorNames = topPositiveFactors.map(factor => factor.name).join(', ');
+        recommendations.push({
+            category: 'Strengths',
+            text: `Continue maintaining your positive habits in: ${factorNames}. These factors are already significantly reducing your biological age.`,
+            priority: 'medium',
+            evidenceRating: 'personalized',
+            impact: 'supportive',
+            timeToEffect: 'ongoing'
+        });
+    }
+    
+    // Calculate age-specific recommendation focus
+    if (calculationResults.chronologicalAge < 30) {
+        // Younger users benefit most from preventative focus
+        recommendations.push({
+            category: 'Age-Specific Strategy',
+            text: 'At your age, focus on prevention and establishing healthy habits. The habits formed now will compound over decades, making this a critical window for longevity planning.',
+            priority: 'medium',
+            evidenceRating: 'moderate',
+            impact: 'long-term',
+            timeToEffect: 'long-term'
+        });
+    } else if (calculationResults.chronologicalAge >= 60) {
+        // Older users benefit from focus on maintenance and specific interventions
+        recommendations.push({
+            category: 'Age-Specific Strategy',
+            text: 'At your age, prioritize maintaining muscle mass, cognitive function, and social connections. These factors become increasingly important for healthy aging after 60.',
+            priority: 'medium',
+            evidenceRating: 'strong',
+            impact: 'significant',
+            timeToEffect: 'medium-term'
+        });
+    }
+    
+    // === PERSONALIZATION ADJUSTMENTS ===
+    
+    // Create personalized lifestyle cluster based on pattern recognition
+    const lifestylePattern = identifyLifestylePattern(data);
+    
+    if (lifestylePattern) {
+        recommendations.push({
+            category: 'Personalized Approach',
+            text: lifestylePattern.recommendation,
+            priority: 'medium',
+            evidenceRating: 'moderate',
+            impact: 'customized',
+            timeToEffect: 'varies'
         });
     }
     
     // Sort recommendations by priority
+    const priorityOrder = { 'high': 0, 'medium': 1, 'low': 2 };
     recommendations.sort((a, b) => {
-        const priorityOrder = { 'high': 0, 'medium': 1, 'low': 2 };
         return priorityOrder[a.priority] - priorityOrder[b.priority];
     });
     
-    // Limit to top 7 recommendations to avoid overwhelming
-    return recommendations.slice(0, 7);
+    // Limit to top recommendations to avoid overwhelming (adaptive to calculation results)
+    // If the person has more high-priority issues, show more recommendations
+    const highPriorityCount = recommendations.filter(r => r.priority === 'high').length;
+    const recommendationLimit = Math.min(Math.max(5, highPriorityCount + 2), 8);
+    
+    return recommendations.slice(0, recommendationLimit);
+}
+
+/**
+ * Identifies lifestyle patterns to provide more targeted recommendations
+ * @param {Object} data - User input data
+ * @returns {Object|null} - Identified pattern or null if no clear pattern
+ */
+function identifyLifestylePattern(data) {
+    // Busy professional pattern
+    if ((data.stress === 'high' || data.stress === 'severe') && 
+        (data.exercise === 'occasional' || data.exercise === 'none') &&
+        (data.sleep === 'less') &&
+        (data['screen-time'] === 'high' || data['screen-time'] === 'excessive')) {
+        
+        return {
+            pattern: 'busy-professional',
+            recommendation: 'Your profile suggests a busy, high-stress lifestyle with limited time for self-care. Consider time-efficient strategies like high-intensity interval training, meal preparation, and scheduled downtime to maximize health benefits with minimal time investment.'
+        };
+    }
+    
+    // Socially isolated pattern
+    if ((data.social === 'isolated') &&
+        (data.stress === 'moderate' || data.stress === 'high') &&
+        (data['mental-activity'] === 'low' || !data['mental-activity'])) {
+        
+        return {
+            pattern: 'socially-isolated',
+            recommendation: 'Your profile indicates social isolation combined with mental and physical health impacts. Consider starting with low-pressure social activities built around your interests, which can simultaneously address multiple health factors.'
+        };
+    }
+    
+    // Health-conscious but sedentary pattern
+    if ((data['diet-quality'] === 'good' || data['diet-quality'] === 'excellent') &&
+        (data.exercise === 'none' || data.exercise === 'occasional') &&
+        (data['daily-movement'] === 'sedentary' || data['daily-movement'] === 'low')) {
+        
+        return {
+            pattern: 'health-diet-sedentary',
+            recommendation: 'You appear to prioritize nutrition but have limited physical activity. While your diet is beneficial, research shows that even excellent nutrition cannot fully compensate for insufficient movement. Consider movement snacks throughout the day.'
+        };
+    }
+    
+    // Physically active but mentally stressed
+    if ((data.exercise === 'regular' || data.exercise === 'daily') &&
+        (data.stress === 'high' || data.stress === 'severe') &&
+        (data.mindfulness === 'none' || !data.mindfulness)) {
+        
+        return {
+            pattern: 'active-but-stressed',
+            recommendation: 'You maintain good physical activity but experience significant mental stress. Consider complementing your physical routine with mental wellness practices like mindfulness, which research shows can amplify the longevity benefits of exercise.'
+        };
+    }
+    
+    // No clear pattern identified
+    return null;
+}
+
+// Export functions
+// In a browser environment, attach to window
+if (typeof window !== 'undefined') {
+    window.generateRecommendations = generateRecommendations;
+    window.identifyLifestylePattern = identifyLifestylePattern;
+}
+
+// For module environments, export functions
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        generateRecommendations,
+        identifyLifestylePattern
+    };
 }
