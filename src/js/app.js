@@ -894,7 +894,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Check out my results from the Advanced Biological Age Calculator!',
                     url: window.location.href
                 };
-                
+                 
                 if (navigator.share) {
                     navigator.share(shareData)
                         .catch((error) => console.log('Error sharing', error));
@@ -1031,3 +1031,86 @@ style.textContent = `
 }
 `;
 document.head.appendChild(style);
+
+/**
+ * JavaScript for scientific references toggle and tooltips
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // References section toggle
+    const expandButton = document.getElementById('expand-references');
+    const referencesContent = document.getElementById('references-content');
+    
+    if (expandButton && referencesContent) {
+        expandButton.addEventListener('click', function() {
+            referencesContent.classList.toggle('expanded');
+            
+            const expandIcon = expandButton.querySelector('.expand-icon');
+            if (referencesContent.classList.contains('expanded')) {
+                expandIcon.textContent = '−';
+                expandButton.querySelector('span:last-child').textContent = ' Close';
+            } else {
+                expandIcon.textContent = '+';
+                expandButton.querySelector('span:last-child').textContent = ' Learn More';
+            }
+        });
+    }
+    
+    // Wait a short time to ensure the DOM is fully processed
+    setTimeout(function() {
+        // Add tooltips for scientific terms in the main content
+        addScientificTermTooltips();
+    }, 100);
+});
+
+/**
+ * Adds tooltips to scientific terms throughout the application
+ * and initializes tooltip functionality
+ */
+function addScientificTermTooltips() {
+    // Dictionary of scientific terms and their definitions
+    const scientificTerms = {
+        'biological age': 'A measure of how well or poorly your body is functioning relative to your chronological age, based on various biomarkers and lifestyle factors.',
+        'chronological age': 'The actual time elapsed since birth, measured in years.',
+        'telomeres': 'Protective caps at the ends of chromosomes that shorten with age and cellular divisions, associated with cellular aging.',
+        'epigenetic': 'Changes in gene expression that do not involve alterations to the underlying DNA sequence.',
+        'biomarkers': 'Measurable indicators of biological states or conditions that can be used to assess health, disease risk, or biological age.',
+        'inflammation': 'The body\'s response to injury or infection, but when chronic can accelerate aging and contribute to age-related diseases.',
+        'oxidative stress': 'An imbalance between free radicals and antioxidants in the body that can damage cells and contribute to aging.',
+        'mitochondrial function': 'The efficiency of cellular energy production, which declines with age and impacts overall health.'
+    };
+    
+    // Find instances of scientific terms in the text content
+    document.querySelectorAll('p, li, label, h2, h3, h4').forEach(element => {
+        const originalText = element.innerHTML;
+        let newText = originalText;
+        
+        // Check for each scientific term
+        Object.keys(scientificTerms).forEach(term => {
+            // Avoid replacing terms that are already in links
+            if (!element.closest('a') && !element.querySelector('a')) {
+                // Case insensitive replacement with regex
+                const regex = new RegExp(`\\b(${term})\\b`, 'gi');
+                
+                // Only replace the first occurrence to avoid too many tooltips
+                if (regex.test(newText)) {
+                    newText = newText.replace(regex, function(match) {
+                        return `<span class="scientific-term">${match}<span class="tooltip-text">${scientificTerms[term.toLowerCase()]}</span></span>`;
+                    });
+                }
+            }
+        });
+        
+        if (newText !== originalText) {
+            element.innerHTML = newText;
+        }
+    });
+    
+    // Initialize tooltips for the newly added terms
+    // Call the global initializeTooltips function after adding the terms
+    if (typeof window.initializeTooltips === 'function') {
+        console.log('Calling initializeTooltips after adding scientific terms');
+        window.initializeTooltips();
+    } else {
+        console.error('initializeTooltips function not available');
+    }
+}

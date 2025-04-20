@@ -69,7 +69,7 @@ body {
 }
 
 a {
-    color: var (--primary-color);
+    color: var(--primary-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -84,9 +84,21 @@ header {
     margin-bottom: var(--spacing-2xl);
 }
 
+/* Enhanced logo styling */
 .logo {
-    max-width: 180px;
+    max-width: 300px;
     margin-bottom: var(--spacing-lg);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .logo {
+        max-width: 250px;
+    }
 }
 
 h1 {
@@ -194,7 +206,7 @@ h1 {
 
 .feature p {
     font-size: var(--text-sm);
-    color: var(--text-medium);
+    color: var (--text-medium);
     margin-bottom: 0;
 }
 
@@ -219,6 +231,268 @@ h1 {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
     color: var(--text-light);
+}
+
+/* Scientific References Styling */
+.references-section {
+    margin: var(--spacing-xl) 0 var(--spacing-2xl) 0;
+    padding: var(--spacing-xl);
+    background-color: #f8f9fa;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.references-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.references-header h3 {
+    margin: 0;
+    color: var(--text-dark);
+    font-size: var(--text-xl);
+}
+
+.expand-button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.expand-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.expand-icon {
+    font-weight: bold;
+    font-size: var(--text-lg);
+    transition: transform 0.3s ease;
+}
+
+.references-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.references-content.expanded {
+    max-height: 2000px;
+}
+
+.reference-category {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.reference-category:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.reference-category h4 {
+    color: var(--primary-dark);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--text-lg);
+}
+
+.citation-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dashed var(--primary-color);
+    transition: all 0.2s ease;
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.citation-link:hover {
+    color: var(--primary-dark);
+    border-bottom-style: solid;
+}
+
+/* New tooltip for citation links */
+.citation-link::after {
+    content: attr(href);
+    visibility: hidden;
+    width: 300px;
+    background-color: rgba(44, 62, 80, 0.95);
+    color: #ffffff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 100;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    font-weight: normal;
+    font-size: 13px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    line-height: 1.5;
+    white-space: normal;
+    word-break: break-all;
+}
+
+.citation-link:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Arrow for citation tooltip */
+.citation-link::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    visibility: hidden;
+    opacity: 0;
+    margin-top: -20px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(44, 62, 80, 0.95) transparent transparent transparent;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 101;
+}
+
+.citation-link:hover::before {
+    visibility: visible;
+    opacity: 1;
+    top: -10px;
+}
+
+.citation-list li {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+}
+
+.external-resources li {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* FIXED: Scientific term tooltips - using global tooltips approach */
+.scientific-term {
+    position: relative;
+    border-bottom: 1px dotted var(--primary-color);
+    cursor: help;
+    display: inline-block;
+}
+
+/* Global tooltip styling */
+.global-tooltip {
+    position: fixed;
+    z-index: 1000;
+    background-color: rgba(44, 62, 80, 0.95);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    max-width: 280px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    pointer-events: none;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.2s ease;
+}
+
+.global-tooltip.visible {
+    opacity: 1;
+}
+
+/* Position arrow for the tooltip */
+.global-tooltip::after {
+    content: "";
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+    /* Default position (above term) */
+    bottom: -10px;
+    left: 50%;
+    margin-left: -5px;
+    border-color: rgba(44, 62, 80, 0.95) transparent transparent transparent;
+}
+
+/* When tooltip is below the term */
+.global-tooltip.position-below::after {
+    bottom: auto;
+    top: -10px;
+    border-color: transparent transparent rgba(44, 62, 80, 0.95) transparent;
+}
+
+/* Alignment variants */
+.global-tooltip.align-left::after {
+    left: 15px;
+    margin-left: 0;
+}
+
+.global-tooltip.align-right::after {
+    left: auto;
+    right: 15px;
+    margin-left: 0;
+}
+
+/* Mobile specific styles */
+@media (max-width: 768px) {
+    .global-tooltip {
+        max-width: 80%;
+        font-size: 13px;
+        padding: 10px;
+    }
+    
+    /* Center tooltip on mobile */
+    .global-tooltip.mobile-centered {
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%);
+    }
+    
+    /* Add a close button for mobile */
+    .global-tooltip.mobile-centered::before {
+        content: '×';
+        position: absolute;
+        top: 5px;
+        right: 8px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        background: rgba(255,255,255,0.3);
+        border-radius: 50%;
+        pointer-events: auto;
+    }
+}
+
+/* Hide the old tooltip implementation */
+.tooltip-text {
+    display: none;
+}
+
+.term-highlight {
+    border-bottom: 1px dotted var(--primary-color);
+    cursor: help;
+    position: relative;
+    display: inline-block;
 }
 
 /* Scroll indicator animation */
@@ -350,5 +624,11 @@ footer {
     
     .container {
         padding: var(--spacing-md);
+    }
+    
+    .references-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
     }
 }
